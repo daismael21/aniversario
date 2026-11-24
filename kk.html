@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>365 Días — Edición Cinematográfica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kk.css" />
+</head>
+<body>
+
+  <!-- UNIVERSO INTERACTIVO EN CANVAS -->
+  <canvas id="universe-canvas"></canvas>
+
+  <!-- PANTALLA 0: PORTAL DE ENTRADA -->
+  <section id="portal" class="portal">
+    <div class="portal-content">
+      <div class="badge-top">EDICIÓN DE COLECCIÓN · 25.11.2025</div>
+      <h1 class="portal-title">Nuestro Primer<br><span>Capítulo Eterno</span></h1>
+      <p class="portal-sub">
+        365 días, miles de risas y una historia que apenas comienza. Mantén o toca el núcleo para entrar.
+      </p>
+
+      <button id="ignite-btn" class="ignite-btn" aria-label="Iniciar experiencia">
+        <span class="ring r1"></span>
+        <span class="ring r2"></span>
+        <span class="core">♥</span>
+      </button>
+      <span class="portal-cta-label">TOCA EL CORAZÓN PARA COMENZAR</span>
+    </div>
+  </section>
+
+  <!-- AUDIO (USA cancion.mp3 SI EXISTE O MELODÍA GENERADA) -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="cancion.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- EXPERIENCIA PRINCIPAL -->
+  <main id="stage" class="stage hidden">
+
+    <!-- HUD FLOTANTE SUPERIOR -->
+    <header class="hud-bar">
+      <div class="vinyl-widget" id="vinyl-toggle" title="Tocar para música">
+        <div class="vinyl-disc" id="vinyl-disc">
+          <div class="vinyl-label">♥</div>
+        </div>
+        <div class="vinyl-info">
+          <span class="vinyl-title">Nuestra Melodía</span>
+          <span class="vinyl-status" id="vinyl-status">Toca para escuchar</span>
+        </div>
+        <div class="eq-bars" id="eq-bars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <button id="fireworks-btn" class="hud-action">✨ Magia</button>
+    </header>
+
+    <!-- SECCIÓN 1: CRONÓMETRO CÓSMICO -->
+    <section class="hero-cosmos reveal-block">
+      <p class="kicker">TIEMPO COMPARTIDO EN TIEMPO REAL</p>
+      <h2 class="display-title">Cada segundo contigo<br><em>vale una vida entera</em></h2>
+
+      <div class="chrono-grid">
+        <div class="chrono-cell">
+          <span id="c-days" class="chrono-num">365</span>
+          <span class="chrono-label">DÍAS</span>
+        </div>
+        <div class="chrono-cell">
+          <span id="c-hours" class="chrono-num">00</span>
+          <span class="chrono-label">HORAS</span>
+        </div>
+        <div class="chrono-cell">
+          <span id="c-mins" class="chrono-num">00</span>
+          <span class="chrono-label">MINUTOS</span>
+        </div>
+        <div class="chrono-cell">
+          <span id="c-secs" class="chrono-num">00</span>
+          <span class="chrono-label">SEGUNDOS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: PROYECTOR 3D + MODO PELÍCULA -->
+    <section class="cinema-section reveal-block">
+      <div class="section-header">
+        <div>
+          <span class="kicker">PROYECTOR DE RECUERDOS</span>
+          <h3 class="section-heading">Nuestros 10 Momentos</h3>
+        </div>
+        <button id="autoplay-btn" class="movie-btn">▶ Modo Película</button>
+      </div>
+
+      <!-- TARJETA PRINCIPAL CON EFECTO TILT 3D -->
+      <div class="tilt-wrapper">
+        <div id="tilt-card" class="tilt-card">
+          <div class="glare" id="card-glare"></div>
+
+          <div class="stage-visual" id="stage-visual">
+            <img id="main-photo" src="fotos/foto11.jpeg" alt="El comienzo de todo" />
+            <div class="photo-counter-tag" id="photo-counter-tag">01 / 10</div>
+            <button id="fullscreen-trigger" class="fs-btn" aria-label="Pantalla completa">⤢</button>
+          </div>
+
+          <div class="stage-meta">
+            <h4 id="main-title">El comienzo de todo</h4>
+            <p id="main-desc">Aquí empezó nuestra mejor historia. Nunca voy a olvidar cómo me sentí ese día contigo.</p>
+
+            <!-- BARRA DE PROGRESO DE PELÍCULA -->
+            <div class="movie-progress-track">
+              <div id="movie-progress-fill" class="movie-progress-fill"></div>
+            </div>
+
+            <div class="stage-controls">
+              <button id="prev-mem" class="ctrl-circle" aria-label="Anterior">←</button>
+              <div id="story-pills" class="story-pills"></div>
+              <button id="next-mem" class="ctrl-circle" aria-label="Siguiente">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARRUSEL TÁCTIL DE POLAROIDS -->
+      <div class="polaroid-strip" id="polaroid-strip"></div>
+    </section>
+
+    <!-- SECCIÓN 3: CARTA DE LUJO -->
+    <section class="letter-luxe reveal-block">
+      <div class="wax-seal">♥</div>
+      <span class="kicker">PARA TI, MI VIDA</span>
+      <h3 class="section-heading">Feliz Primer Aniversario</h3>
+      <p class="letter-body">
+        Parece mentira que ya haya pasado un año desde aquel 25 de noviembre de 2025.
+        Gracias por cada risa, cada abrazo, cada consejo y por transformar días normales
+        en mis recuerdos favoritos. Eres mi persona favorita y mi mejor aventura.
+      </p>
+      <div class="letter-signature">Con todo mi amor, hoy y siempre ❤️</div>
+    </section>
+
+    <!-- SECCIÓN 4: SORPRESA INTERACTIVA "RASPA Y DESCUBRE" -->
+    <section class="scratch-section reveal-block">
+      <span class="kicker">SORPRESA OCULTA</span>
+      <h3 class="section-heading">Raspa la tarjeta dorada</h3>
+      <p class="scratch-hint">Pasa tu dedo (o el mouse) sobre el recuadro para revelar el mensaje secreto.</p>
+
+      <div class="scratch-box" id="scratch-box">
+        <div class="secret-reveal">
+          <span class="secret-emoji">🎟️✨</span>
+          <h4>VALE POR UNA CITA INOLVIDABLE</h4>
+          <p>Tú eliges el lugar, la comida (¡pizza incluida! 🍕) y el plan. ¡Te amo infinito! ❤️</p>
+        </div>
+        <canvas id="scratch-canvas"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- VISOR INMERSIVO PANTALLA COMPLETA -->
+  <div id="immersive-modal" class="immersive-modal hidden">
+    <button id="close-immersive" class="close-immersive">✕</button>
+    <img id="immersive-img" src="" alt="Vista completa" />
+    <div class="immersive-caption">
+      <h4 id="immersive-title"></h4>
+      <p id="immersive-desc"></p>
+    </div>
+  </div>
+
+  <script src="kk.js"></script>
+</body>
+</html>
